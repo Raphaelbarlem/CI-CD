@@ -22,10 +22,7 @@ destroy:
 passwd:
 	@echo "JENKINS:"
 	@kubectl get secret -n jenkins jenkins -ojson | jq -r '.data."jenkins-admin-password"' | base64 -d
-	@echo ""
 	@echo "GITEA:"
-	@echo "r8sA8CPHD9!bt6d | jenkins: fv#4ChTvoBhtRc"
 	@echo "SONARQUBE:"
-	@echo "krE^NiQvTc@75G"
 	@echo "ARGOCD:"
 	@kubectl get secret -n argocd argocd-initial-admin-secret -ojson | jq -r '.data.password' | base64 -d
