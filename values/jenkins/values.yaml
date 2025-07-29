@@ -25,11 +25,38 @@ controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
   image:
-    registry: "docker.io"
-    repository: "jenkins/jenkins"
-    # tag: "2.440.1-jdk17"
-    tagLabel: jdk17
-    pullPolicy: "Always"
+   registry: "docker.io"
+   repository: "jenkins/jenkins"
+   tag: "2.452.1-jdk17"
+   pullPolicy: "Always"
+   command:
+   - sh
+   - -c
+   - echo "init done"
+  securityContext:
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    resources:
+    limits:
+    cpu: "2"
+    memory: 4Gi
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  volumeMounts:
+  - name: jenkins-home
+    mountPath: /var/jenkins_home
+  - name: jenkins-config
+    mountPath: /var/jenkins_config
+  - name: plugins
+    mountPath: /usr/share/jenkins/ref/plugins
+  - name: plugin-dir
+    mountPath: /var/jenkins_plugins
+  - name: tmp-volume
+    mountPath: /tmp
+
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
   lifecycle:
