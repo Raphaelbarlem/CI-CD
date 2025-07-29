@@ -1,0 +1,2 @@
+values/jenkins/pod-*.yaml
+manifests/*credentials*.yaml
